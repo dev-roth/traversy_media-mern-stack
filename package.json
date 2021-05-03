@@ -1,0 +1,33 @@
+{
+  "name": "mern-shopping-list",
+  "version": "0.1.0",
+  "description": "code examples from the \"Learn the MERN Stack\" Tutorial",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch" : "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MightyWalrus/traversy_media-mern-stack.git"
+  },
+  "keywords": [
+    "MERN"
+  ],
+  "author": "MightyWalrus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MightyWalrus/traversy_media-mern-stack/issues"
+  },
+  "homepage": "https://github.com/MightyWalrus/traversy_media-mern-stack#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
