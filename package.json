@@ -4,9 +4,10 @@
   "description": "code examples from the \"Learn the MERN Stack\" Tutorial",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch" : "nodemon server.js"
+    "server" : "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
