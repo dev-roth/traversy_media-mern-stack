@@ -7,8 +7,7 @@ import {
     Nav,
     NavItem,
     NavLink,
-    Container,
-    Col
+    Container
 } from 'reactstrap';
 
 class AppNavbar extends Component {
@@ -30,7 +29,7 @@ class AppNavbar extends Component {
         <div>
             <Navbar color="dark" dark expand="sm" className="mb-5">
                 <Container>
-                    <NavbarBrand href="/">ShoppingList</NavbarBrand>
+                    <NavbarBrand href="/">ShoppingList (Learn MERN Stack)</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar >
                         <Nav className="ml-auto" nvabar>
