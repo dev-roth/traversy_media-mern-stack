@@ -1,19 +1,30 @@
-import React, { Component } from 'react';
-import AppNavbar from './components/AppNavbar'
-import ShoppingList from './components/ShoppingList';
+import React, { Component } from "react";
+import AppNavbar from "./components/AppNavbar";
+import ShoppingList from "./components/ShoppingList";
 
-import 'bootstrap/dist/css/bootstrap.css'
-import './App.css';
+import { Provider } from "react-redux";
+import store from "./store";
+
+import "bootstrap/dist/css/bootstrap.css";
+import "./App.css";
+import { Container } from "reactstrap";
+import ItemModal from "./components/ItemModal";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <AppNavbar />
-        <ShoppingList />
-      </div>
-    );
-  }
+	render() {
+		return (
+			// Provider makes the Redux store available to any nested components that need to acccess it.
+			<Provider store={store}>
+				<div className="App">
+					<AppNavbar />
+					<Container>
+						<ItemModal />
+						<ShoppingList />
+					</Container>
+				</div>
+			</Provider>
+		);
+	}
 }
 
 export default App;
