@@ -10,7 +10,6 @@ import {
 	ModalBody,
 	ModalHeader,
 } from "reactstrap";
-import { v4 } from "uuid";
 import { addItem } from "../actions/itemActions";
 
 class ItemModal extends Component {
@@ -38,7 +37,6 @@ class ItemModal extends Component {
 		e.preventDefault();
 
 		const newItem = {
-			id: v4(),
 			name: this.state.itemName,
 		};
 
