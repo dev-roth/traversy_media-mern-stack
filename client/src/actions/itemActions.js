@@ -1,5 +1,5 @@
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from "./types";
-import axios from "axios";
+import axios from "axios"; // Promise based HTTP client 
 
 // function "getItems" is an (Redux) action creator, therefore returning resp. dispatching the corresponding action.
 export const getItems = () => (dispatch) => {
