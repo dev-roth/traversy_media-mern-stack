@@ -4,9 +4,6 @@ const router = express.Router();
 // Load the Item Model
 const Item = require('../../models/item');
 
-// Routes //
-// => root route: /api/items (see server.js)
-
 // @route GET api/items
 // @desc Get All Items
 // @access Public

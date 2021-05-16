@@ -6,9 +6,6 @@ require('dotenv').config(); // enable access to .env file
 const mongoURL = process.env.DATABASE_URL;
 const port = process.env.PORT || 5000;
 
-const itemRoutes = require("./routes/api/items");
-const userRoutes = require("./routes/api/users");
-
 // Init the express app
 const app = express();
 
@@ -25,10 +22,10 @@ mongoose
 	.then(() => console.log("MongoDB connected"))
 	.catch((error) => console.log(`using ${mongoURL} caused ${error}`));
 
-// Use routes (basically map /api/items/* calls to the itemRoutes)
-// => alternatively one could use app.get(...), app.post(...) instead of the dedicated express.Router
-app.use("/api/items", itemRoutes);
-app.use("/api/users", userRoutes);
+// Use separate routes
+app.use("/api/items", require("./routes/api/items"));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {

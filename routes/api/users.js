@@ -1,12 +1,11 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const router = express.Router();
+const bcrypt = require("bcryptjs"); // bcrypt is a password-hashing function based on the Blowfish cipher
+const jwt = require("jsonwebtoken"); // an implementation of JSON Web Tokens (also see https://jwt.io/)
+require("dotenv").config; // enable access to .env file
 
-// Load the Item Model
+// Load the User Model
 const User = require("../../models/user");
-
-// Routes //
-// => root route: /api/users (see server.js)
 
 // @route POST api/users
 // @desc Register new user
@@ -31,22 +30,38 @@ router.post("/", (req, res) => {
 			password,
 		});
 
-		// Create salt & hash
+		// Create salt & hash 
+		// => a salt is random data that is used as an additional input to a one-way function that hashes data, a password or passphrase. Both the hash value and the salt is stored.
 		bcrypt.genSalt(10, (err, salt) => {
-			bcrypt.hash(newUser.password, salt, (err, hash) => {
+			bcrypt.hash(password, salt, (err, hash) => {
 				if (err) {
 					throw err;
 				}
 				// use hashed password instead of plain text
 				newUser.password = hash;
+				// finally save user with hashed password in MongoDB
 				newUser.save().then((user) => {
-					res.status(200).json({
-						user: {
-                            id: user._id,
-                            name,
-                            email
-                        },
-					});
+					// sign resp. transform the given payload into a JWT string (can be checked on https://jwt.io/)
+					jwt.sign(
+						{
+							id: user._id,
+						},
+						process.env.JWT_SECRET,
+						{ expiresIn: 3600 },
+						(err, token) => {
+							if (err) {
+								throw err;
+							}
+							res.status(200).json({
+								token,
+								user: {
+									id: user._id,
+									name,
+									email,
+								},
+							});
+						}
+					);
 				});
 			});
 		});
