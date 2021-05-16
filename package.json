@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/MightyWalrus/traversy_media-mern-stack#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^6.0.2",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",

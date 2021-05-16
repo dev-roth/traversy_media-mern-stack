@@ -6,6 +6,10 @@ const Item = require('../../models/item');
 
 // Routes //
 // => root route: /api/items (see server.js)
+
+// @route GET api/items
+// @desc Get All Items
+// @access Public
 router.get('/', (req, res) => {
     // documents are fetched from the MongoDB collection
     Item.find()

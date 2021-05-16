@@ -17,6 +17,8 @@
    1. Adjust server.js to serve static assets in production (instead of using the development server)
    2. Add a custom build script to the package.json based on the particular deployment needs (using `npm install` and `npm build` commands)
 8. We actually triggered a deployment on Heroku, after having created an app in Heroku.
+9. (Optional/ self taught) We replaced DB URL (incl. Credentials) in plain text with env variable (both on Heroku via config variable and locally via .env file)
+10. TODO: We added authentication via JWT
 
 ## Notes on developing the solution
 
