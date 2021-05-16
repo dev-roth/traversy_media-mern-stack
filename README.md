@@ -10,10 +10,13 @@
 1. We created the MonogDB DB (in this case a remote DB, could have been a local one as well).
 2. We setup the BE (`npm init`) and provided real CRUD operations to the connected MongoDB (via mongoose). Tested via some REST client.
 3. We setup the client (`npx create-react-app`) and started to implement some UI elements (via react and reactstrap).
-4. We continued implementing the client by developing some logic and React components (using mocks as data).
-5. We added state management (via redux and react-redux) - still using mocks without any persistence.
-6. We connected the FE to the BE and therefore provided real persistence (via axios).
-7. Prepare app for production/ deployment (adjust server.js, add postbuild script)
+4. We continued implementing the client by adding React components (using mocks as data).
+5. We added state management (via redux and react-redux) - still using mocks without any persistence so far.
+6. We connected the FE to the BE and therefore provided real persistence (client (web) requests via axios).
+7. We prepared the app for production/ deployment
+   1. Adjust server.js to serve static assets in production (instead of using the development server)
+   2. Add a custom build script to the package.json based on the particular deployment needs (using `npm install` and `npm build` commands)
+8. We actually triggered a deployment on Heroku, after having created an app in Heroku.
 
 ## Notes on developing the solution
 
@@ -59,5 +62,7 @@
   - create a free account, create a new app via Web UI or via Heroku CLI (<https://devcenter.heroku.com/articles/heroku-cli>)
   - chose deployment method:
     - Heroku Git via Heroku CLI
-    - Connected GitHub repository  
+    - connected GitHub repository  
     => in both cases a push to the particular repository will trigger the deployment
+  - improving security by extracting the DB credentials (plain text within the code) into Heroku config variables (<https://devcenter.heroku.com/articles/config-vars>)  
+  => Config vars are exposed to your app’s code as environment variables. For example, in Node.js you can access your app’s DATABASE_URL config var with `process.env.DATABASE_URL`.

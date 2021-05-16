@@ -3,7 +3,8 @@ const mongoose = require("mongoose"); // ORM for MongoDB
 const bodyParser = require("body-parser"); // parsing request body
 const path = require("path"); // built-in file path utility
 
-const mongoUri = require("./config/keys").mongoURI; // contains both URL and Credentials
+require('dotenv').config(); // enable access to .env file
+const mongoURL = process.env.DATABASE_URL;
 const port = process.env.PORT || 5000;
 const itemRoutes = require("./routes/api/items");
 
@@ -15,9 +16,9 @@ app.use(bodyParser.json());
 
 // Connect to MongoDB (using Promise API)
 mongoose
-	.connect(mongoUri)
+	.connect(mongoURL)
 	.then(() => console.log("MongoDB connected"))
-	.catch((error) => console.log(error));
+	.catch((error) => console.log(`using ${mongoURL} caused ${error}`));
 
 // Use routes (basically map /api/items/* calls to the itemRoutes)
 // => alternatively one could use app.get(...), app.post(...) instead of the dedicated express.Router
