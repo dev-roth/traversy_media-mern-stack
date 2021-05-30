@@ -10,20 +10,20 @@ const initialState = {
 export default function itemReducer(state = initialState, action) {
 	switch (action.type) {
 		case GET_ITEMS:
-			// returns a copy of the current state including the (new) items from the payload (fetched from the server)
+			// Returns a copy of the current state including the items from the payload (fetched from the server).
 			return {
 				...state,
 				items: action.payload,
 				loading: false
 			};
 		case ADD_ITEM:
-			// returns a copy of the current state including the item being added (defined by the payload)
+			// Returns a copy of the current state including the item being added (defined by the payload).
 			return {
 				...state,
 				items: [action.payload, ...state.items],
 			};
 		case DELETE_ITEM:
-			// returns a copy of the current state exluding the item being deleted (defined by the payload)
+			// Returns a copy of the current state exluding the item being deleted (defined by the payload).
 			return {
 				...state,
 				items: state.items.filter((item) => item._id !== action.payload),

@@ -8,7 +8,8 @@ import rootReducer from "./reducers";
 const middleware = [thunk];
 const initialState = {};
 
-// creates the central Redux store
+// Creates the central, one and only Redux store. A store holds the whole state tree of your application. 
+// The store is however just an object with a few methods on it. 
 const store = createStore(
 	// rootReducer can be one or multiple, combined reducer functions
 	rootReducer,

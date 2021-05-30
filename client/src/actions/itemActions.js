@@ -3,15 +3,16 @@ import axios from "axios"; // Promise based HTTP client
 
 // function "getItems" is an (Redux) action creator, therefore returning resp. dispatching the corresponding action.
 export const getItems = () => (dispatch) => {
-	// in a real project, dispatching the dispatched ITEMS_LOADING action would trigger some loading spinner
+	// In a real project, dispatching the dispatched ITEMS_LOADING action would trigger some loading spinner
 	dispatch(setItemsLoading());
 	axios
-		// due to the configured proxy within client/package.json, there is no need to specify the host & port
+		// Due to the configured proxy within the client/package.json, there is no need to specify the host & port.
 		.get("/api/items")
 		.then((res) =>
 			dispatch(
 				// The returned resp. dispatched POJO is a Redux action with the obligatory "type" property (could be named differently though).
 				// The action can have additional properties added like a payload the reducer may need to process.
+				// Dispatched actions are the only way in Redux to chamge the state (within the store by the particulat reducers).
 				{
 					type: GET_ITEMS,
 					payload: res.data,

@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
 			return res.status(400).json({ msg: "User already registered!" });
 		}
 
+		// Create new user object/ document
 		const newUser = new User({
 			name,
 			email,
@@ -37,17 +38,21 @@ router.post("/", (req, res) => {
 				if (err) {
 					throw err;
 				}
-				// use hashed password instead of plain text
+				// Replace plain text password with the hashed one
 				newUser.password = hash;
-				// finally save user with hashed password in MongoDB
+				// Finally save the user with the hashed password in MongoDB
 				newUser.save().then((user) => {
 					// sign resp. transform the given payload into a JWT string (can be checked on https://jwt.io/)
 					jwt.sign(
+						// actual payload
 						{
 							id: user._id,
 						},
+						// private key/ secrete#
 						process.env.JWT_SECRET,
+						// options (here: expiration date/ time)
 						{ expiresIn: 3600 },
+						// callback for failure/ success
 						(err, token) => {
 							if (err) {
 								throw err;
