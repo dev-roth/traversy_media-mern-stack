@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs"); // bcrypt is a password-hashing function based on the Blowfish cipher
 const jwt = require("jsonwebtoken"); // an implementation of JSON Web Tokens (also see https://jwt.io/)
+// Import the middleware for protected access
+const auth = require('../../middleware/auth');
 require("dotenv").config; // enable access to .env file
 
 // Load the User Model
@@ -51,6 +53,15 @@ router.post("/", (req, res) => {
 			);
 		});
 	});
+});
+
+// @route GET api/auth/user
+// @desc Get the user data
+// @access Private
+router.get("/user", auth, (req, res) => {
+	User.findById(req.user.id) // user id is fetched from the (request) token
+	.select('-password') // select user without her/his password
+	.then(user => res.json(user));
 });
 
 // old faschioned export (new approach via "export default router" only workds in newer browsers)

@@ -32,7 +32,13 @@
    2. Add a custom build script to the package.json based on the particular deployment needs (using `npm install` and `npm build` among other commands).
 8. We actually triggered a deployment on Heroku (using git push as the actual trigger), after having created an app in Heroku (web UI or via CLI).
 9. Optional/ self taught - We replaced the DB URL (incl. Credentials) in plain text with an env variable (both on Heroku via config variable and locally via .env file).
-10. TODO: We added authentication via JWT
+10. We added authentication via JWT.
+    1. BE:
+       1. We added `jsonwebtoken` (auth impl) & `bcryptjs` (password hashing) as BE dependencies.
+       2. We added both a user model and an /user route to the app in order to provide an endpoint for user registration (saving the user with a hashed password).
+       3. We added an /auth route to the app in order to provide an endpoint for user authentication/ login, by returning a JWT token to the client.
+       4. We implemented an auth middleware that could and indeed was used for protecting certain routes by enforcing the client to provide a valid JWT token.
+    2. FE: adsf
 
 ## Notes on developing the solution
 
@@ -87,11 +93,12 @@
 ## Notes on JWT
 
 - Homepage: <https://jwt.io/>
-- JWT := JSON Web Tokens - which are an open, industry standard RFC 7519 method for representing claims securely between two parties using JSON objects.
-- The transmitted information can be verified and trusted, because it is digitally signed. JWTs can be signed using a secret or a public/private key.
-- In its compact form, JSON Web Tokens consist of three parts separated by dots (.). Example:
+- JWT := JSON Web Tokens  
+  An open, industry standard RFC 7519 method for representing claims securely between two parties using JSON objects.
+- The transmitted information can be verified and trusted (=> `jwt.verify(token, secret)`), because it is digitally signed (=> `jwt.sign(payload, secret,...)`). JWTs can be signed using a secret or a public/private key.
+- In its compact form, JSON Web Tokens consist of three parts separated by dots. Example:
   - Token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`
-  - Header:
+  - Header (`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9`):
 
     ```json
     {
@@ -100,7 +107,7 @@
     }
     ```
 
-  - Payload:
+  - Payload (`eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ`):
   
     ```json
     {
@@ -110,12 +117,12 @@
     }
     ```
   
-  - Signature:
+  - Signature (`SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c`):
 
     ```code
     HMACSHA256(
       base64UrlEncode(header) + "." +
       base64UrlEncode(payload),
-      <secret>
+      <YOUR_SECRET>
     ) 
     ```
