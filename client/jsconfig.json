@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+      "module": "es6",
+      "target": "es2019",
+      "moduleResolution": "node",
+      "baseUrl": "./src",
+      "checkJs": true,
+      "jsx": "react"
+    }
+  }

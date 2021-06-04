@@ -9,8 +9,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import { Container } from "reactstrap";
 import ItemModal from "./components/ItemModal";
+import { loadUser } from "actions/authActions";
 
 class App extends Component {
+
+	componentDidMount() {
+		store.dispatch(loadUser());
+	}
+
 	render() {
 		return (
 			// Provider makes the Redux store available to any nested components that need to acccess it.

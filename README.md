@@ -38,7 +38,9 @@
        2. We added both a user model and an /user route to the app in order to provide an endpoint for user registration (saving the user with a hashed password).
        3. We added an /auth route to the app in order to provide an endpoint for user authentication/ login, by returning a JWT token to the client.
        4. We implemented an auth middleware that could and indeed was used for protecting certain routes by enforcing the client to provide a valid JWT token.
-    2. FE: adsf
+    2. FE:
+       1. We added the authentication info to our state by adding corresponding reducers.
+       2. 
 
 ## Notes on developing the solution
 
