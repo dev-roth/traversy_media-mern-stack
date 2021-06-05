@@ -1,6 +1,12 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
-import { AUTH_ERROR, USER_LOADED, USER_LOADING } from "./types";
+import {
+	AUTH_ERROR,
+	REGISTER_FAIL,
+	REGISTER_SUCCESS,
+	USER_LOADED,
+	USER_LOADING,
+} from "./types";
 
 // check token & load user (async via dispatch function)
 export const loadUser = () => (dispatch, getState) => {
@@ -22,6 +28,34 @@ export const loadUser = () => (dispatch, getState) => {
 			});
 		});
 };
+
+// Register new user
+export const register =
+	({ name, email, password }) =>
+	(dispatch) => {
+		const config = {
+			headers: {
+				"Content-type": "application/json",
+			},
+		};
+
+		const body = JSON.stringify({ name, email, password });
+
+		axios
+			.post("/api/users", body, config)
+			.then((res) =>
+				dispatch({
+					type: REGISTER_SUCCESS,
+					payload: res.data,
+				})
+			)
+			.catch((err) => {
+				dispatch(returnErrors(err.response.data, err.response.status, "REGISTER_FAIL"));
+				dispatch({
+					type: REGISTER_FAIL,
+				});
+			});
+	};
 
 export const getTokenconfig = (getState) => {
 	// Get token from localstorage

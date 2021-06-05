@@ -9,6 +9,7 @@ import {
 	NavLink,
 	Container,
 } from "reactstrap";
+import RegisterModal from "./auth/RegisterModal";
 
 class AppNavbar extends Component {
 	constructor(props) {
@@ -35,6 +36,9 @@ class AppNavbar extends Component {
 						<NavbarToggler onClick={this.toggle} />
 						<Collapse isOpen={this.state.isOpen} navbar>
 							<Nav className="ml-auto" nvabar>
+								<NavItem>
+									<RegisterModal />
+								</NavItem>
 								<NavItem>
 									<NavLink href="https://github.com/MightyWalrus/traversy_media-mern-stack">
 										Github (MightyWalrus)

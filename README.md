@@ -39,8 +39,12 @@
        3. We added an /auth route to the app in order to provide an endpoint for user authentication/ login, by returning a JWT token to the client.
        4. We implemented an auth middleware that could and indeed was used for protecting certain routes by enforcing the client to provide a valid JWT token.
     2. FE:
-       1. We added the authentication info to our state by adding corresponding reducers.
-       2. 
+       1. We added the authentication info to our state by adding corresponding action types, actions and action creators + reducers.
+       2. We also implemented some error handling via Redux.
+       3. We implemented both a registration and a login form in order to register new users and login already registered users.  
+          We basically connect to the auth BE code by getting the request parameters and payload via form input.
+       4. We saved the JWT token in the localstorage once a user successfully logged in.
+       5. We passed the saved JWT token to private/ protected REST calls that have been secured in the BE.
 
 ## Notes on developing the solution
 
