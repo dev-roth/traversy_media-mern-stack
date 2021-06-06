@@ -2,7 +2,8 @@ const express = require("express"); // JS backend (Node Web-Framework)
 const mongoose = require("mongoose"); // ORM for MongoDB
 const path = require("path"); // built-in file path utility
 
-require('dotenv').config(); // enable access to .env file
+require("dotenv").config();
+// enable access to .env file
 const mongoURL = process.env.DATABASE_URL;
 const port = process.env.PORT || 5000;
 
@@ -18,7 +19,7 @@ mongoose
 		// recommended options to use, but would work without them too
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
-		useCreateIndex: true
+		useCreateIndex: true,
 	})
 	.then(() => console.log("MongoDB connected"))
 	.catch((error) => console.log(`using ${mongoURL} caused ${error}`));
