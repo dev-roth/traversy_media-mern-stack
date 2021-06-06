@@ -9,6 +9,7 @@ import {
 	NavLink,
 	Container,
 } from "reactstrap";
+import Logout from "./auth/Logout";
 import RegisterModal from "./auth/RegisterModal";
 
 class AppNavbar extends Component {
@@ -38,6 +39,9 @@ class AppNavbar extends Component {
 							<Nav className="ml-auto" nvabar>
 								<NavItem>
 									<RegisterModal />
+								</NavItem>
+								<NavItem>
+									<Logout />
 								</NavItem>
 								<NavItem>
 									<NavLink href="https://github.com/MightyWalrus/traversy_media-mern-stack">

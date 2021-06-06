@@ -1,7 +1,11 @@
 import axios from "axios";
-import { returnErrors } from "./errorActions";
+import {
+	returnErrors
+} from "./errorActions";
 import {
 	AUTH_ERROR,
+	LOGIN_SUCCESS,
+	LOGOUT_SUCCESS,
 	REGISTER_FAIL,
 	REGISTER_SUCCESS,
 	USER_LOADED,
@@ -11,7 +15,9 @@ import {
 // check token & load user (async via dispatch function)
 export const loadUser = () => (dispatch, getState) => {
 	// User loading
-	dispatch({ type: USER_LOADING });
+	dispatch({
+		type: USER_LOADING
+	});
 
 	axios
 		.get("/api/auth/user", getTokenconfig(getState))
@@ -31,7 +37,11 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register new user
 export const register =
-	({ name, email, password }) =>
+	({
+		name,
+		email,
+		password
+	}) =>
 	(dispatch) => {
 		const config = {
 			headers: {
@@ -39,7 +49,11 @@ export const register =
 			},
 		};
 
-		const body = JSON.stringify({ name, email, password });
+		const body = JSON.stringify({
+			name,
+			email,
+			password
+		});
 
 		axios
 			.post("/api/users", body, config)
@@ -56,6 +70,13 @@ export const register =
 				});
 			});
 	};
+
+// Logout User
+export const logout = () => {
+	return {
+		type: LOGOUT_SUCCESS
+	};
+};
 
 export const getTokenconfig = (getState) => {
 	// Get token from localstorage
